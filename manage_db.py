@@ -8,8 +8,12 @@ def create_db():
     pickle.dump(db, open('save.p', 'wb'))
 
 def load_db():
-    db = pickle.load(open( "save.p", "rb" ))
-    return db
+    try:
+        db = pickle.load(open('save.p', 'rb'))
+        return db
+    except IOError:
+        print('No db found, run "create_db.py" first')
+        return None
 
 def update_db(all_dirpaths):
     db = load_db()
@@ -17,5 +21,5 @@ def update_db(all_dirpaths):
     db['date'] = str(datetime.datetime.now())
     pickle.dump(db, open('save.p', 'wb'))
 
-if __name__ == '__main__':
-    create_db()
+#if __name__ == '__main__':
+#    create_db()
