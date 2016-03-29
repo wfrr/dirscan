@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import pickle, scan, datetime, time
+import pickle, scan, datetime, time, os.path
 
 def create_db():
     print('creating...')
@@ -8,10 +8,10 @@ def create_db():
     pickle.dump(db, open('save.p', 'wb'))
 
 def load_db():
-    try:
+    if os.path.isfile('save.p'):
         db = pickle.load(open('save.p', 'rb'))
         return db
-    except IOError:
+    else:
         print('No db found, run "create_db.py" first')
         return None
 
